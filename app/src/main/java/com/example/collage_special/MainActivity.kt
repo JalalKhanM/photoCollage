@@ -16,6 +16,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.mobi.collage.R
 
 class MainActivity : AppCompatActivity() {
 

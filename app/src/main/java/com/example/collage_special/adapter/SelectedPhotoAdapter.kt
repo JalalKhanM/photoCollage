@@ -1,12 +1,13 @@
 package com.example.collage_special.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.collage_special.AndroidUtils
-import com.example.collage_special.R
+import com.mobi.collage.R
 import java.util.ArrayList
 
 class SelectedPhotoAdapter(
@@ -32,7 +33,7 @@ class SelectedPhotoAdapter(
         return mImages.size
     }
 
-    override fun onBindViewHolder(holder: SelectedPhotoViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SelectedPhotoViewHolder, @SuppressLint("RecyclerView") position: Int) {
         AndroidUtils.loadImageWithGlide(
             holder.selectedImage.context,
             holder.selectedImage,

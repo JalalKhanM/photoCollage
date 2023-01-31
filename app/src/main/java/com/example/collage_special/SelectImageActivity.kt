@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.collage_special.fragments.GalleryAlbumImageFragment
 import com.example.collage_special.adapter.SelectedPhotoAdapter
 import com.example.collage_special.fragments.GalleryAlbumFragment
+import com.mobi.collage.R
 import kotlinx.android.synthetic.main.activity_select_image.*
 import java.io.File
 import java.lang.Exception

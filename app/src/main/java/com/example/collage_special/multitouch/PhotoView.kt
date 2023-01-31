@@ -14,10 +14,10 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import com.example.collage_special.R
 import com.example.collage_special.frame.FrameTouch
 import com.example.collage_special.frame.OnFrameTouchListener
 import com.example.collage_special.utils.ImageDecoder
+import com.mobi.collage.R
 
 import java.util.ArrayList
 

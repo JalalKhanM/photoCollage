@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.activity_collage.ll_border
 import android.content.Intent
 import android.os.SystemClock
 import android.widget.ImageView
+import com.mobi.collage.R
 import java.io.*
 
 

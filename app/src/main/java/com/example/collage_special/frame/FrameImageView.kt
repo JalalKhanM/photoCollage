@@ -20,13 +20,13 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.Toast
-import com.example.collage_special.R
 import com.example.collage_special.multitouch.MultiTouchHandler
 import com.example.collage_special.template.PhotoItem
 import com.example.collage_special.utils.GeometryUtils
 import com.example.collage_special.utils.ImageDecoder
 import com.example.collage_special.utils.ImageUtils
 import com.example.collage_special.utils.ResultContainer
+import com.mobi.collage.R
 
 import java.util.ArrayList
 

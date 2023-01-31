@@ -8,8 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.collage_special.AndroidUtils
-import com.example.collage_special.R
 import com.example.collage_special.model.GalleryAlbum
+import com.mobi.collage.R
 import java.lang.StringBuilder
 
 class GalleryAlbumRecyclerAdapter(

@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import com.example.collage_special.AndroidUtils
-import com.example.collage_special.R
+import com.mobi.collage.R
+
 
 class GalleryAlbumImageAdapter(context: Context, list: List<String>) :
     ArrayAdapter<String>(context, R.layout.item_gallery_photo, list) {

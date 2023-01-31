@@ -8,7 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.example.collage_special.R
+import com.mobi.collage.R
 
 class FilterNameAdapter(context: Context,filterList:Array<String>) : Adapter<FilterNameAdapter.FilterNameHolder>() {
 

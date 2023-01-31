@@ -9,7 +9,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.example.collage_special.R
+import com.mobi.collage.R
+
 
 class BackgroundAdapter(
     context: Context,

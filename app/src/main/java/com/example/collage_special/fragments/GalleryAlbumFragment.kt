@@ -14,10 +14,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.collage_special.R
+
 import com.example.collage_special.adapter.GalleryAlbumAdapter
 import com.example.collage_special.adapter.GalleryAlbumRecyclerAdapter
 import com.example.collage_special.model.GalleryAlbum
+import com.mobi.collage.R
 import kotlinx.android.synthetic.main.fragment_gallery_album.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

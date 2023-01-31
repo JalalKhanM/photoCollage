@@ -8,8 +8,8 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.collage_special.AndroidUtils
-import com.example.collage_special.R
 import com.example.collage_special.model.GalleryAlbum
+import com.mobi.collage.R
 
 class GalleryAlbumAdapter(
     context: Context,

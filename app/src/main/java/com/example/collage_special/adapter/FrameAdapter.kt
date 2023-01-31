@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.example.collage_special.R
+
 import com.example.collage_special.model.TemplateItem
 import com.example.collage_special.utils.PhotoUtils
+import com.mobi.collage.R
 
 class FrameAdapter(
     context: Context,

@@ -1,6 +1,7 @@
 package com.example.collage_special
 
 
+import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
@@ -26,6 +27,7 @@ import android.util.DisplayMetrics
 import android.util.Log
 import android.widget.RelativeLayout
 import com.example.collage_special.MainActivity.Companion.isFromSaved
+import com.mobi.collage.R
 
 
 class MyCreationActivity : AppCompatActivity() {
@@ -133,7 +135,7 @@ class MyCreationActivity : AppCompatActivity() {
             return paths.size
         }
 
-        override fun onBindViewHolder(holder: CreationHolder, position: Int) {
+        override fun onBindViewHolder(holder: CreationHolder, @SuppressLint("RecyclerView") position: Int) {
 
             val dm = DisplayMetrics()
             windowManager.defaultDisplay.getMetrics(dm)

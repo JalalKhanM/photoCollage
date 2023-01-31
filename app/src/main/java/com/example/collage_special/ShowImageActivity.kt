@@ -17,6 +17,8 @@ import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import com.mobi.collage.BuildConfig
+import com.mobi.collage.R
 import java.io.File
 
 class ShowImageActivity : AppCompatActivity(), View.OnClickListener {
@@ -80,14 +82,14 @@ class ShowImageActivity : AppCompatActivity(), View.OnClickListener {
         val share = Intent("android.intent.action.SEND")
 
         share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        share.putExtra(
-            "android.intent.extra.STREAM",
-            FileProvider.getUriForFile(
-                this@ShowImageActivity,
-                BuildConfig.APPLICATION_ID + ".provider",
-                saved_file!!
-            )
-        )
+//        share.putExtra(
+//            "android.intent.extra.STREAM",
+//            FileProvider.getUriForFile(
+//                this@ShowImageActivity,
+//                BuildConfig.APPLICATION_ID + ".provider",
+//                saved_file!!
+//            )
+//        )
         share.putExtra(Intent.EXTRA_TEXT,getString(R.string.txt_share))
 
         //        share.putExtra("android.intent.extra.STREAM", Uri.fromFile(saved_file));

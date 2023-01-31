@@ -10,9 +10,7 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.provider.MediaStore
 import android.widget.Toast
-
-import com.example.collage_special.R
-
+import com.mobi.collage.R
 import java.io.IOException
 import java.io.InputStream
 
@@ -529,13 +527,13 @@ object ImageDecoder {
     fun getRealPathFromURI(activity: Context, contentURI: Uri): String? {
         val cursor = activity.contentResolver.query(contentURI, null, null, null, null)
         // Source is Dropbox or other similar local file path
-        if (cursor == null)
-            return contentURI.path
+        return if (cursor == null)
+            contentURI.path
         else {
             cursor.moveToFirst()
             val idx = cursor
                 .getColumnIndex(MediaStore.Images.ImageColumns.DATA)
-            return cursor.getString(idx)
+            cursor.getString(idx)
         }
     }
 }

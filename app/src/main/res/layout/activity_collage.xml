@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/windowBackground"
     android:orientation="vertical"
-    tools:context=".CollageActivity">
+   >
 
     <ImageView
         android:id="@+id/btn_next"

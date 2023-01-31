@@ -14,8 +14,9 @@ import android.net.Uri
 import android.os.Parcel
 import android.os.Parcelable
 
-import com.example.collage_special.R
+
 import com.example.collage_special.utils.ImageDecoder
+import com.mobi.collage.R
 
 class ImageEntity : MultiTouchEntity {
     private var mInitScaleFactor = 0.25

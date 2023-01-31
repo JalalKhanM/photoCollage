@@ -17,14 +17,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.recyclerview.widget.LinearLayoutManager
+
 import androidx.recyclerview.widget.RecyclerView
 import com.example.collage_special.MainActivity.Companion.isFromSaved
-import com.example.collage_special.adapter.FilterNameAdapter
 import com.example.collage_special.model.FilterData
+import com.mobi.collage.R
 import kotlinx.android.synthetic.main.activity_filter_collage.*
-import kotlinx.android.synthetic.main.activity_filter_collage.filter_names
-import kotlinx.android.synthetic.main.activity_filter_collage.list_filterstype
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
