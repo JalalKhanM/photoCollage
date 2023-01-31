@@ -16,16 +16,16 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/img_save"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
         android:layout_gravity="end"
         android:layout_margin="10dp"
         android:background="@drawable/bg_header"
         android:text="Save"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:gravity="center"
-        android:layout_marginTop="5dp"
+        android:textAllCaps="false"
         />
 
     <RelativeLayout
@@ -46,9 +46,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
+
         >
 
         <androidx.recyclerview.widget.RecyclerView

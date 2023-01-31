@@ -46,7 +46,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginBottom="3dp"
+        >
 
         <LinearLayout
             android:id="@+id/tab_layout"
@@ -63,6 +65,7 @@
                 android:text="Layout"
                 android:textColor="@color/white"
                 android:textSize="16sp"
+                android:id="@+id/tab_layoutText"
 
                 />
         </LinearLayout>
@@ -82,7 +85,7 @@
                 android:text="Border"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-
+                android:id="@+id/tab_borderText"
 
                 />
         </LinearLayout>
@@ -102,6 +105,7 @@
                 android:text="Background"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                android:id="@+id/tab_bgText"
 
                 />
 

@@ -153,6 +153,10 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
                 tab_border.setBackgroundColor(ResourcesCompat.getColor(resources,R.color.white,null))
                 tab_bg.setBackgroundColor(ResourcesCompat.getColor(resources,R.color.white,null))
 
+                tab_layoutText.setTextColor(Color.WHITE)
+                tab_borderText.setTextColor(Color.BLACK)
+                tab_bgText.setTextColor(Color.BLACK)
+
                 ll_frame.visibility = View.VISIBLE
                 ll_border.visibility = View.GONE
                 ll_bg.visibility = View.GONE
@@ -161,7 +165,11 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
             R.id.tab_border -> {
                 tab_layout.setBackgroundColor(resources.getColor(R.color.white))
                 tab_border.background = ResourcesCompat.getDrawable(resources,R.drawable.bg_header,null)
-                tab_bg.setBackgroundColor(resources.getColor(R.color.windowBackground))
+                tab_bg.setBackgroundColor(resources.getColor(R.color.white))
+
+                tab_layoutText.setTextColor(Color.BLACK)
+                tab_borderText.setTextColor(Color.WHITE)
+                tab_bgText.setTextColor(Color.BLACK)
 
                 ll_frame.visibility = View.GONE
                 ll_border.visibility = View.VISIBLE
@@ -171,6 +179,10 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
                 tab_layout.setBackgroundColor(resources.getColor(R.color.white))
                 tab_border.setBackgroundColor(resources.getColor(R.color.white))
                 tab_bg.background = ResourcesCompat.getDrawable(resources,R.drawable.bg_header,null)
+
+                tab_layoutText.setTextColor(Color.WHITE)
+                tab_borderText.setTextColor(Color.WHITE)
+                tab_bgText.setTextColor(Color.BLACK)
 
                 ll_frame.visibility = View.GONE
                 ll_border.visibility = View.GONE
