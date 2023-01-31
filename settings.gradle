@@ -12,6 +12,10 @@ dependencyResolutionManagement {
         google()
         jcenter()
         mavenCentral()
+        maven {
+            url "https://jitpack.io"
+
+        }
     }
 }
 rootProject.name = "Collage_Special"
