@@ -17,10 +17,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.Toast
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.collage_special.MainActivity.Companion.isFromSaved
 import com.example.collage_special.model.FilterData
+import com.jaeger.library.StatusBarUtil
 import com.mobi.collage.R
 import kotlinx.android.synthetic.main.activity_filter_collage.*
 import java.io.File
@@ -44,12 +46,13 @@ class FilterCollageActivity : AppCompatActivity(), View.OnClickListener {
                 isFromSaved = true
                 try {
                     saveBitmap(screenShot)
+                    Toast.makeText(this,"Image saved, successfully",Toast.LENGTH_LONG).show()
                 } catch (th: Throwable) {
                     th.printStackTrace()
                 }
-                val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("image_uri", savedImageUri!!.toString())
-                startActivityForResult(intent, 2)
+//                val intent = Intent(this, MainActivity::class.java)
+//                intent.putExtra("image_uri", savedImageUri!!.toString())
+//                startActivityForResult(intent, 2)
                 finish()
             }
         }
@@ -113,6 +116,7 @@ class FilterCollageActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var bmp: Bitmap
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        StatusBarUtil.setTranslucent(this)
         setContentView(R.layout.activity_filter_collage)
 
         val bitmapPath = this.cacheDir.absolutePath + "/tempBMP"

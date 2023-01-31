@@ -1,6 +1,7 @@
 package com.example.collage_special
 
 
+import android.app.Activity
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -24,7 +25,12 @@ import kotlinx.android.synthetic.main.activity_collage.*
 import kotlinx.android.synthetic.main.activity_collage.ll_border
 import android.content.Intent
 import android.os.SystemClock
+import android.view.Window
+import android.view.WindowManager
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import com.jaeger.library.StatusBarUtil
 import com.mobi.collage.R
 import java.io.*
 
@@ -142,9 +148,9 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
         when (v!!.id) {
 
             R.id.tab_layout -> {
-                tab_layout.setBackgroundColor(resources.getColor(R.color.colorAAccent))
-                tab_border.setBackgroundColor(resources.getColor(R.color.windowBackground))
-                tab_bg.setBackgroundColor(resources.getColor(R.color.windowBackground))
+                tab_layout.background = ResourcesCompat.getDrawable(resources,R.drawable.bg_header,null)
+                tab_border.setBackgroundColor(ResourcesCompat.getColor(resources,R.color.white,null))
+                tab_bg.setBackgroundColor(ResourcesCompat.getColor(resources,R.color.white,null))
 
                 ll_frame.visibility = View.VISIBLE
                 ll_border.visibility = View.GONE
@@ -153,7 +159,7 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
 
             R.id.tab_border -> {
                 tab_layout.setBackgroundColor(resources.getColor(R.color.windowBackground))
-                tab_border.setBackgroundColor(resources.getColor(R.color.colorAAccent))
+                tab_border.background = ResourcesCompat.getDrawable(resources,R.drawable.bg_header,null)
                 tab_bg.setBackgroundColor(resources.getColor(R.color.windowBackground))
 
                 ll_frame.visibility = View.GONE
@@ -163,7 +169,7 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
             R.id.tab_bg -> {
                 tab_layout.setBackgroundColor(resources.getColor(R.color.windowBackground))
                 tab_border.setBackgroundColor(resources.getColor(R.color.windowBackground))
-                tab_bg.setBackgroundColor(resources.getColor(R.color.colorAAccent))
+                tab_bg.background = ResourcesCompat.getDrawable(resources,R.drawable.bg_header,null)
 
                 ll_frame.visibility = View.GONE
                 ll_border.visibility = View.GONE
@@ -193,8 +199,20 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
         }
     }
 
+    fun setStatusBarGradiant(activity: Activity) {
+        val window: Window = activity.window
+        val background = ContextCompat.getDrawable(activity, R.drawable.bg_header)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+
+        window.statusBarColor = ContextCompat.getColor(activity,android.R.color.transparent)
+        window.navigationBarColor = ContextCompat.getColor(activity,android.R.color.transparent)
+        window.setBackgroundDrawable(background)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        StatusBarUtil.setTranslucent(this)
         setContentView(R.layout.activity_collage)
 
         DEFAULT_SPACE = ImageUtils.pxFromDp(this, 2F)
