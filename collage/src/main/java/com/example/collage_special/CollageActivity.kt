@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.activity_collage.*
 import kotlinx.android.synthetic.main.activity_collage.ll_border
 import android.content.Intent
 import android.os.SystemClock
+import android.util.Log.w
 import android.view.Window
 import android.view.WindowManager
 import android.widget.ImageView
@@ -158,7 +159,7 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
             }
 
             R.id.tab_border -> {
-                tab_layout.setBackgroundColor(resources.getColor(R.color.windowBackground))
+                tab_layout.setBackgroundColor(resources.getColor(R.color.white))
                 tab_border.background = ResourcesCompat.getDrawable(resources,R.drawable.bg_header,null)
                 tab_bg.setBackgroundColor(resources.getColor(R.color.windowBackground))
 
@@ -167,8 +168,8 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
                 ll_bg.visibility = View.GONE
             }
             R.id.tab_bg -> {
-                tab_layout.setBackgroundColor(resources.getColor(R.color.windowBackground))
-                tab_border.setBackgroundColor(resources.getColor(R.color.windowBackground))
+                tab_layout.setBackgroundColor(resources.getColor(R.color.white))
+                tab_border.setBackgroundColor(resources.getColor(R.color.white))
                 tab_bg.background = ResourcesCompat.getDrawable(resources,R.drawable.bg_header,null)
 
                 ll_frame.visibility = View.GONE
