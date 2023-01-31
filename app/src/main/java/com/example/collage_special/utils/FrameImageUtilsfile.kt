@@ -499,10 +499,6 @@ object FrameImageUtils {
         } else if (frameName == "collage_10_8.png") {
             return TenFrameImage.collage_10_8()
         }
-        else if (frameName == "collage_16_1.png") {
-            return SixteenFrameImage.collage_16_1()
-        }
-
         return null
     }
 }
