@@ -25,7 +25,6 @@
         android:textColor="@color/white"
         android:textSize="24sp"
         android:gravity="center"
-        android:fontFamily="@font/roboto_medium"
         android:layout_marginTop="5dp"
         />
 
