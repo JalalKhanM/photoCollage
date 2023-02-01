@@ -24,16 +24,22 @@ import com.example.collage_special.utils.ImageUtils
 import kotlinx.android.synthetic.main.activity_collage.*
 import kotlinx.android.synthetic.main.activity_collage.ll_border
 import android.content.Intent
+import android.media.MediaScannerConnection
+import android.os.Environment
 import android.os.SystemClock
+import android.util.Log
 import android.util.Log.w
 import android.view.Window
 import android.view.WindowManager
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.jaeger.library.StatusBarUtil
 import com.mobi.collage.R
 import java.io.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class CollageActivity : AppCompatActivity(), View.OnClickListener,
@@ -180,9 +186,9 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
                 tab_border.setBackgroundColor(resources.getColor(R.color.white))
                 tab_bg.background = ResourcesCompat.getDrawable(resources,R.drawable.bg_header,null)
 
-                tab_layoutText.setTextColor(Color.WHITE)
-                tab_borderText.setTextColor(Color.WHITE)
-                tab_bgText.setTextColor(Color.BLACK)
+                tab_layoutText.setTextColor(Color.BLACK)
+                tab_borderText.setTextColor(Color.BLACK)
+                tab_bgText.setTextColor(Color.WHITE)
 
                 ll_frame.visibility = View.GONE
                 ll_border.visibility = View.GONE
@@ -195,33 +201,64 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
 
                 var outStream: FileOutputStream? = null
                 try {
-                    var collageBitmap = createOutputImage()
-                    outStream = FileOutputStream(File(cacheDir, "tempBMP"))
-                    collageBitmap.compress(Bitmap.CompressFormat.JPEG, 75, outStream)
-                    outStream.close()
+                    val collageBitmap = createOutputImage()
+                   saveBitmap(collageBitmap)
+                    Toast.makeText(this,"Image Saved, Successfully",Toast.LENGTH_LONG).show()
+                    finish()
                 } catch (e: FileNotFoundException) {
                     e.printStackTrace()
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
 
-                val intent = Intent(this, FilterCollageActivity::class.java)
-                startActivity(intent)
-                finish()
+
+
+                /*      var outStream: FileOutputStream? = null
+                      try {
+                          val collageBitmap = createOutputImage()
+                          outStream = FileOutputStream(File(cacheDir, "tempBMP"))
+                          collageBitmap.compress(Bitmap.CompressFormat.JPEG, 75, outStream)
+                          outStream.close()
+                      } catch (e: FileNotFoundException) {
+                          e.printStackTrace()
+                      } catch (e: IOException) {
+                          e.printStackTrace()
+                      }
+
+                      val intent = Intent(this, FilterCollageActivity::class.java)
+                      startActivity(intent)
+                      finish()*/
             }
         }
     }
 
-    fun setStatusBarGradiant(activity: Activity) {
-        val window: Window = activity.window
-        val background = ContextCompat.getDrawable(activity, R.drawable.bg_header)
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+    fun saveBitmap(bitmap: Bitmap) {
+        val mainDir = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "RosyEditor")
+        if (!mainDir.exists()) {
+            if (mainDir.mkdir())
+                Log.e("Create Directory", "Main Directory Created : $mainDir")
+        }
+        val now = Date()
+        val fileName = (now.time / 1000).toString() + ".png"
 
-        window.statusBarColor = ContextCompat.getColor(activity,android.R.color.transparent)
-        window.navigationBarColor = ContextCompat.getColor(activity,android.R.color.transparent)
-        window.setBackgroundDrawable(background)
+        val file = File(mainDir.absolutePath, fileName)
+        try {
+            val fOut = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut)
+            fOut.flush()
+            fOut.close()
+
+          /*  savedImageUri = Uri.parse(file.path)*/
+
+            MediaScannerConnection.scanFile(this, arrayOf(file.absolutePath), null) { path, uri ->
+                Log.i("ExternalStorage", "Scanned $path:")
+                Log.i("ExternalStorage", "-> uri=$uri")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

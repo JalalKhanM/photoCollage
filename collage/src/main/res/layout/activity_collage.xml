@@ -13,7 +13,7 @@
         android:layout_height="40dp"
         android:background="@drawable/bg_header2"
         />
-    <androidx.appcompat.widget.AppCompatButton
+   <!-- <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_next"
         android:layout_width="100dp"
         android:layout_height="30dp"
@@ -25,7 +25,20 @@
         android:textSize="20sp"
         android:gravity="center"
         android:textAllCaps="false"
+        />-->
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_next"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_gravity="end"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_header"
+        android:text="Save"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textAllCaps="false"
         />
 
     <RelativeLayout
