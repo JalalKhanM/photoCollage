@@ -22,4 +22,7 @@
     <color name="colorPPrimaryDark">#000000</color>
     <!--<color name="colorAccent">#D81B60</color>-->
     <color name="colorAAccent">#FAC53B</color>
+
+    <color name="main1">#FFAD80</color>
+    <color name="main2">#EE557B</color>
 </resources>
