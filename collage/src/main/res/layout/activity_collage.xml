@@ -172,7 +172,9 @@
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="3dp"
-                    android:progressDrawable="@drawable/red_scrubber_progress" />
+                    android:progressDrawable="@drawable/red_scrubber_progress"
+                    android:thumb="@drawable/red_scrubber_control"
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -198,7 +200,7 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="5dp"
                     android:progressDrawable="@drawable/red_scrubber_progress"
-
+                    android:thumb="@drawable/red_scrubber_control"
                     />
             </LinearLayout>
         </LinearLayout>

@@ -15,9 +15,9 @@ class Testting : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_testting)
 
-
         val intent = Intent(this, SelectImageActivity::class.java)
         startActivity(intent)
+
 
 
     }
