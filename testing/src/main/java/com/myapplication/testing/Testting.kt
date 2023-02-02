@@ -18,8 +18,6 @@ class Testting : AppCompatActivity() {
         val intent = Intent(this, SelectImageActivity::class.java)
         startActivity(intent)
 
-
-
     }
 
 

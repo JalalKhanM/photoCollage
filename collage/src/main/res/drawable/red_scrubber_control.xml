@@ -1,4 +1,7 @@
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:exitFadeDuration="@android:integer/config_mediumAnimTime"
+    android:enterFadeDuration="@android:integer/config_mediumAnimTime"
+    >
 
 
     <item android:drawable="@drawable/seekbar_thumb" android:state_pressed="true"/>
