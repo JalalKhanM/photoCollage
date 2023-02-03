@@ -156,12 +156,12 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
 
             R.id.tab_layout -> {
                 tab_layout.background = ResourcesCompat.getDrawable(resources,R.drawable.bg_header,null)
-                tab_border.setBackgroundColor(ResourcesCompat.getColor(resources,R.color.white,null))
-                tab_bg.setBackgroundColor(ResourcesCompat.getColor(resources,R.color.white,null))
+                tab_border.background = ResourcesCompat.getDrawable(resources,R.drawable.disable_bg,null)
+                tab_bg.background = ResourcesCompat.getDrawable(resources,R.drawable.disable_bg,null)
 
                 tab_layoutText.setTextColor(Color.WHITE)
-                tab_borderText.setTextColor(Color.BLACK)
-                tab_bgText.setTextColor(Color.BLACK)
+                tab_borderText.setTextColor(Color.GRAY)
+                tab_bgText.setTextColor(Color.GRAY)
 
                 ll_frame.visibility = View.VISIBLE
                 ll_border.visibility = View.GONE
@@ -169,25 +169,25 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
             }
 
             R.id.tab_border -> {
-                tab_layout.setBackgroundColor(resources.getColor(R.color.white))
+                tab_layout.background = ResourcesCompat.getDrawable(resources,R.drawable.disable_bg,null)
                 tab_border.background = ResourcesCompat.getDrawable(resources,R.drawable.bg_header,null)
-                tab_bg.setBackgroundColor(resources.getColor(R.color.white))
+                tab_bg.background = ResourcesCompat.getDrawable(resources,R.drawable.disable_bg,null)
 
-                tab_layoutText.setTextColor(Color.BLACK)
+                tab_layoutText.setTextColor(Color.GRAY)
                 tab_borderText.setTextColor(Color.WHITE)
-                tab_bgText.setTextColor(Color.BLACK)
+                tab_bgText.setTextColor(Color.GRAY)
 
                 ll_frame.visibility = View.GONE
                 ll_border.visibility = View.VISIBLE
                 ll_bg.visibility = View.GONE
             }
             R.id.tab_bg -> {
-                tab_layout.setBackgroundColor(resources.getColor(R.color.white))
-                tab_border.setBackgroundColor(resources.getColor(R.color.white))
+                tab_layout.background = ResourcesCompat.getDrawable(resources,R.drawable.disable_bg,null)
+                tab_border.background = ResourcesCompat.getDrawable(resources,R.drawable.disable_bg,null)
                 tab_bg.background = ResourcesCompat.getDrawable(resources,R.drawable.bg_header,null)
 
-                tab_layoutText.setTextColor(Color.BLACK)
-                tab_borderText.setTextColor(Color.BLACK)
+                tab_layoutText.setTextColor(Color.GRAY)
+                tab_borderText.setTextColor(Color.GRAY)
                 tab_bgText.setTextColor(Color.WHITE)
 
                 ll_frame.visibility = View.GONE
@@ -290,20 +290,16 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
         seekbar_corner.setOnSeekBarChangeListener(corner_listener())
 
         mPhotoView = PhotoView(this)
-        rl_container.getViewTreeObserver()
+        rl_container.viewTreeObserver
             .addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
                     mOutputScale = ImageUtils.calculateOutputScaleFactor(
-                        rl_container.getWidth(),
-                        rl_container.getHeight()
+                        rl_container.width,
+                        rl_container.height
                     )
                     buildLayout(mSelectedTemplateItem!!)
                     // remove listener
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                        rl_container.getViewTreeObserver().removeOnGlobalLayoutListener(this)
-                    } else {
-                        rl_container.getViewTreeObserver().removeGlobalOnLayoutListener(this)
-                    }
+                    rl_container.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 }
             })
 
