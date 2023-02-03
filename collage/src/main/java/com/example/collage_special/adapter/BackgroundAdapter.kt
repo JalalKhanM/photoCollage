@@ -3,13 +3,19 @@ package com.example.collage_special.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.provider.Settings.Global
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.collage_special.CollageActivity
 import com.mobi.collage.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class BackgroundAdapter(
@@ -22,6 +28,7 @@ class BackgroundAdapter(
     var mContext = context
     var bgListener: OnBGClickListener = bgClickListener
     var selectedindex = 0
+    var lastSelected = 0
 
     init {
         mImages = mContext.assets.list("background") as Array<String>
@@ -46,25 +53,36 @@ class BackgroundAdapter(
         @SuppressLint("RecyclerView") position: Int
     ) {
 
-        var inputStream = mContext.assets.open("background/" + mImages[position])
-        var drawable = Drawable.createFromStream(inputStream, null) as Drawable
-        holder.img_frame.setImageDrawable(drawable)
+
+        var drawable: Drawable? = null
+
+        (mContext as (CollageActivity)).lifecycleScope.launch(Dispatchers.IO) {
+            val inputStream = mContext.assets.open("background/" + mImages[position])
+            drawable = Drawable.createFromStream(inputStream, null) as Drawable
+
+            this.launch(Dispatchers.Main) {
+                Glide.with(mContext).load(drawable).into(holder.img_frame)
+            }
+        }
+
+
+//        holder.img_frame.setImageDrawable(drawable)
 
         if (selectedindex == position) {
-            holder.ll_itemframe.setBackgroundColor(mContext.resources.getColor(R.color.colorAAccent))
+            holder.ll_itemframe.setBackgroundColor(mContext.resources.getColor(R.color.main2))
         } else {
             holder.ll_itemframe.setBackgroundColor(mContext.resources.getColor(R.color.transparent))
         }
 
-        holder.img_frame.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                selectedindex = position
+        holder.img_frame.setOnClickListener {
+            selectedindex = position
 
-                bgListener.onBGClick(drawable)
-                notifyDataSetChanged()
-            }
+            drawable?.let { bgListener.onBGClick(it) }
 
-        })
+            notifyItemChanged(lastSelected)
+            notifyItemChanged(position)
+            lastSelected = position
+        }
     }
 
     class BackgroundHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

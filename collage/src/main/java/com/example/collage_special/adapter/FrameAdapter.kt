@@ -24,12 +24,14 @@ class FrameAdapter(
 
     var frameListener: OnFrameClickListener = frameClickListener
 
+    var lastSelected = 0
+
     interface OnFrameClickListener {
         fun onFrameClick(templateItem: TemplateItem)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FrameHolder {
-        var view = LayoutInflater.from(parent.context).inflate(R.layout.item_frame, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_frame, parent, false)
 
         return FrameHolder(view)
     }
@@ -44,17 +46,19 @@ class FrameAdapter(
         PhotoUtils.loadImageWithGlide(mContext, holder.img_frame, mImages[position].preview)
 
         if (mImages[position].isSelected) {
-            holder.ll_itemframe.setBackgroundColor(mContext.resources.getColor(R.color.colorAAccent))
+            holder.ll_itemframe.setBackgroundColor(mContext.resources.getColor(R.color.main2))
         } else {
             holder.ll_itemframe.setBackgroundColor(mContext.resources.getColor(R.color.transparent))
         }
 
-        holder.img_frame.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                frameListener.onFrameClick(mImages[position])
-            }
+        holder.img_frame.setOnClickListener {
+            frameListener.onFrameClick(mImages[position])
 
-        })
+            notifyItemChanged(position)
+            notifyItemChanged(lastSelected)
+            lastSelected = position
+
+        }
     }
 
     class FrameHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

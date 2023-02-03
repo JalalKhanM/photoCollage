@@ -82,8 +82,8 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
 
     override fun onBGClick(drawable: Drawable) {
 
-        var bmp = mFramePhotoLayout!!.createImage()
-        var bitmap = (drawable as BitmapDrawable).bitmap
+        val bmp = mFramePhotoLayout!!.createImage()
+        val bitmap = (drawable as BitmapDrawable).bitmap
         mBackgroundImage = AndroidUtils.resizeImageToNewSize(bitmap, bmp.width, bmp.height)
 
 //        img_background.background = BitmapDrawable(resources, mBackgroundImage)
@@ -116,7 +116,6 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
 
         mSelectedTemplateItem = templateItem
         mSelectedTemplateItem!!.isSelected = true
-        frameAdapter.notifyDataSetChanged()
         buildLayout(templateItem)
     }
 
@@ -303,15 +302,16 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
                 }
             })
 
-        img_background = findViewById<ImageView>(R.id.img_background)
+        img_background = findViewById(R.id.img_background)
 
         loadFrameImages()
+
         list_frames.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         frameAdapter = FrameAdapter(this, mTemplateItemList!!, this)
         list_frames.adapter = frameAdapter
 
 
-        mSelectedTemplateItem = mTemplateItemList!!.get(0)
+        mSelectedTemplateItem = mTemplateItemList!![0]
         mSelectedTemplateItem!!.isSelected = true
 
         if (extraImagePaths != null) {
