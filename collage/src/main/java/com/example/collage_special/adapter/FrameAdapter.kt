@@ -46,7 +46,7 @@ class FrameAdapter(
         PhotoUtils.loadImageWithGlide(mContext, holder.img_frame, mImages[position].preview)
 
         if (mImages[position].isSelected) {
-            holder.ll_itemframe.setBackgroundColor(mContext.resources.getColor(R.color.main2))
+            holder.ll_itemframe.setBackgroundColor(mContext.resources.getColor(R.color.main1))
         } else {
             holder.ll_itemframe.setBackgroundColor(mContext.resources.getColor(R.color.transparent))
         }

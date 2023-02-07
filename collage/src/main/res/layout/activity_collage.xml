@@ -25,7 +25,6 @@
             android:textStyle="bold"
             />
 
-
         <ImageButton
             android:id="@+id/btn_next"
             android:layout_width="40dp"
@@ -34,7 +33,9 @@
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="5dp"
-            android:background="@drawable/save_collage_2" />
+            android:background="@drawable/save_collage_2"
+
+            />
 
 
     </RelativeLayout>
@@ -61,15 +62,14 @@
         android:id="@+id/rl_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+       >
 
         <ImageView
             android:id="@+id/img_background"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:adjustViewBounds="true"
-            android:orientation="horizontal" />
+            android:layout_height="match_parent"
+            />
     </RelativeLayout>
 
     <LinearLayout

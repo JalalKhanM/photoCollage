@@ -1,45 +1,41 @@
 package com.example.collage_special
 
 
-import android.app.Activity
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.media.MediaScannerConnection
 import android.net.Uri
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
+import android.os.SystemClock
+import android.util.DisplayMetrics
+import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
+import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.SeekBar
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.scale
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.collage_special.adapter.BackgroundAdapter
 import com.example.collage_special.adapter.FrameAdapter
 import com.example.collage_special.frame.FramePhotoLayout
-import com.example.collage_special.multitouch.PhotoView
 import com.example.collage_special.model.TemplateItem
-import com.example.collage_special.utils.*
+import com.example.collage_special.multitouch.PhotoView
+import com.example.collage_special.utils.FrameImageUtils
 import com.example.collage_special.utils.ImageUtils
-import kotlinx.android.synthetic.main.activity_collage.*
-import kotlinx.android.synthetic.main.activity_collage.ll_border
-import android.content.Intent
-import android.media.MediaScannerConnection
-import android.os.Environment
-import android.os.SystemClock
-import android.util.Log
-import android.util.Log.w
-import android.view.Window
-import android.view.WindowManager
-import android.widget.ImageView
-import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import com.jaeger.library.StatusBarUtil
 import com.mobi.collage.R
-import java.io.*
+import kotlinx.android.synthetic.main.activity_collage.*
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
+import java.io.IOException
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class CollageActivity : AppCompatActivity(), View.OnClickListener,
@@ -87,7 +83,7 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
         mBackgroundImage = AndroidUtils.resizeImageToNewSize(bitmap, bmp.width, bmp.height)
 
 //        img_background.background = BitmapDrawable(resources, mBackgroundImage)
-        img_background.setImageBitmap(mBackgroundImage)
+//        img_background.setImageBitmap(mBackgroundImage)
 
     }
 
@@ -154,9 +150,12 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
         when (v!!.id) {
 
             R.id.tab_layout -> {
-                tab_layout.background = ResourcesCompat.getDrawable(resources,R.drawable.bg_header,null)
-                tab_border.background = ResourcesCompat.getDrawable(resources,R.drawable.disable_bg,null)
-                tab_bg.background = ResourcesCompat.getDrawable(resources,R.drawable.disable_bg,null)
+                tab_layout.background =
+                    ResourcesCompat.getDrawable(resources, R.drawable.bg_header, null)
+                tab_border.background =
+                    ResourcesCompat.getDrawable(resources, R.drawable.disable_bg, null)
+                tab_bg.background =
+                    ResourcesCompat.getDrawable(resources, R.drawable.disable_bg, null)
 
                 tab_layoutText.setTextColor(Color.WHITE)
                 tab_borderText.setTextColor(Color.GRAY)
@@ -168,9 +167,12 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
             }
 
             R.id.tab_border -> {
-                tab_layout.background = ResourcesCompat.getDrawable(resources,R.drawable.disable_bg,null)
-                tab_border.background = ResourcesCompat.getDrawable(resources,R.drawable.bg_header,null)
-                tab_bg.background = ResourcesCompat.getDrawable(resources,R.drawable.disable_bg,null)
+                tab_layout.background =
+                    ResourcesCompat.getDrawable(resources, R.drawable.disable_bg, null)
+                tab_border.background =
+                    ResourcesCompat.getDrawable(resources, R.drawable.bg_header, null)
+                tab_bg.background =
+                    ResourcesCompat.getDrawable(resources, R.drawable.disable_bg, null)
 
                 tab_layoutText.setTextColor(Color.GRAY)
                 tab_borderText.setTextColor(Color.WHITE)
@@ -181,9 +183,12 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
                 ll_bg.visibility = View.GONE
             }
             R.id.tab_bg -> {
-                tab_layout.background = ResourcesCompat.getDrawable(resources,R.drawable.disable_bg,null)
-                tab_border.background = ResourcesCompat.getDrawable(resources,R.drawable.disable_bg,null)
-                tab_bg.background = ResourcesCompat.getDrawable(resources,R.drawable.bg_header,null)
+                tab_layout.background =
+                    ResourcesCompat.getDrawable(resources, R.drawable.disable_bg, null)
+                tab_border.background =
+                    ResourcesCompat.getDrawable(resources, R.drawable.disable_bg, null)
+                tab_bg.background =
+                    ResourcesCompat.getDrawable(resources, R.drawable.bg_header, null)
 
                 tab_layoutText.setTextColor(Color.GRAY)
                 tab_borderText.setTextColor(Color.GRAY)
@@ -201,15 +206,14 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
                 var outStream: FileOutputStream? = null
                 try {
                     val collageBitmap = createOutputImage()
-                   saveBitmap(collageBitmap)
-                    Toast.makeText(this,"Image Saved, Successfully",Toast.LENGTH_LONG).show()
+                    saveBitmap(collageBitmap)
+                    Toast.makeText(this, "Image Saved, Successfully", Toast.LENGTH_LONG).show()
                     finish()
                 } catch (e: FileNotFoundException) {
                     e.printStackTrace()
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
-
 
 
                 /*      var outStream: FileOutputStream? = null
@@ -232,7 +236,10 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
     }
 
     fun saveBitmap(bitmap: Bitmap) {
-        val mainDir = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "RosyEditor")
+        val mainDir = File(
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM),
+            "RosyEditor"
+        )
         if (!mainDir.exists()) {
             if (mainDir.mkdir())
                 Log.e("Create Directory", "Main Directory Created : $mainDir")
@@ -247,7 +254,7 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
             fOut.flush()
             fOut.close()
 
-          /*  savedImageUri = Uri.parse(file.path)*/
+            /*  savedImageUri = Uri.parse(file.path)*/
 
             MediaScannerConnection.scanFile(this, arrayOf(file.absolutePath), null) { path, uri ->
                 Log.i("ExternalStorage", "Scanned $path:")
@@ -258,6 +265,7 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
         }
 
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -292,10 +300,10 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
         rl_container.viewTreeObserver
             .addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
-                    mOutputScale = ImageUtils.calculateOutputScaleFactor(
-                        rl_container.width,
-                        rl_container.height
-                    )
+                    /* mOutputScale = ImageUtils.calculateOutputScaleFactor(
+                         rl_container.width,
+                         rl_container.height
+                     )*/
                     buildLayout(mSelectedTemplateItem!!)
                     // remove listener
                     rl_container.viewTreeObserver.removeOnGlobalLayoutListener(this)
@@ -340,6 +348,27 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
         }
     }
 
+    fun getScaledBitmap(bitmap: Bitmap) {
+        val viewWidth = rl_container.width
+        val viewHeight = rl_container.height
+
+        val displayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        val height = displayMetrics.heightPixels
+        val width = displayMetrics.widthPixels
+
+
+        try {
+            val bitmap2 = bitmap.scale(width, viewHeight, false)
+            val bg = BitmapDrawable(this.resources, bitmap2)
+            img_background.background = bg
+
+        } catch (e: Exception) {
+
+            Log.e("Bitmap Error", " error = ${e.message}")
+        }
+    }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
@@ -363,8 +392,9 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
 //            rl_container.setBackgroundColor(mBackgroundColor)
 //        }
 
-        var viewWidth = rl_container.getWidth()
-        var viewHeight = rl_container.getHeight()
+        var viewWidth = rl_container.width
+        var viewHeight = rl_container.height
+
         if (mLayoutRatio === RATIO_SQUARE) {
             if (viewWidth > viewHeight) {
                 viewWidth = viewHeight
@@ -389,6 +419,8 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
         }
 
         mOutputScale = ImageUtils.calculateOutputScaleFactor(viewWidth, viewHeight)
+
+
         mFramePhotoLayout!!.build(viewWidth, viewHeight, mOutputScale, mSpace, mCorner)
         if (mSavedInstanceState != null) {
             mFramePhotoLayout!!.restoreInstanceState(mSavedInstanceState!!)
@@ -407,8 +439,8 @@ class CollageActivity : AppCompatActivity(), View.OnClickListener,
         rl_container.addView(mPhotoView, params)
         //reset space and corner seek bars
 
-        seekbar_space.setProgress((MAX_SPACE_PROGRESS * mSpace / MAX_SPACE).toInt())
-        seekbar_corner.setProgress((MAX_CORNER_PROGRESS * mCorner / MAX_CORNER).toInt())
+        seekbar_space.progress = (MAX_SPACE_PROGRESS * mSpace / MAX_SPACE).toInt()
+        seekbar_corner.progress = (MAX_CORNER_PROGRESS * mCorner / MAX_CORNER).toInt()
     }
 
     @Throws(OutOfMemoryError::class)

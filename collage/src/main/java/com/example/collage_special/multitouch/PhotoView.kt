@@ -10,7 +10,6 @@ import android.graphics.Paint.Style
 import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
-import android.os.Build
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -38,11 +37,11 @@ import java.util.ArrayList
 
     private val mLinePaintTouchPointCircle = Paint()
 
-    private val wdth: Int = 0
-    private val hight: Int = 0
     private var displayWidth: Int = 0
     private var displayHeight: Int = 0
+
     // Hung NV add onDoubleClick listener
+
     private var mCurrentSelectedObject: MultiTouchEntity? = null
     private var mSelectedCount = 0
     private var mSelectedTime = System.currentTimeMillis()
@@ -55,6 +54,7 @@ import java.util.ArrayList
     // //////////////////////////
     private var mFrameTouchListener: OnFrameTouchListener? = null
     private var mTouchedObject: MultiTouchEntity? = null
+
     // ---------------------------------------------------------------------------------------------------
 
     constructor(context: Context) : this(context, null) {
@@ -83,20 +83,15 @@ import java.util.ArrayList
         val metrics = res.displayMetrics
         this.displayWidth =
             if (res.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
-                Math
-                    .max(metrics.widthPixels, metrics.heightPixels)
+                metrics.widthPixels.coerceAtLeast(metrics.heightPixels)
             else
-                Math.min(
-                    metrics.widthPixels, metrics.heightPixels
-                )
+                metrics.widthPixels.coerceAtMost(metrics.heightPixels)
         this.displayHeight =
             if (res.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
-                Math
-                    .min(metrics.widthPixels, metrics.heightPixels)
+                metrics.widthPixels.coerceAtMost(metrics.heightPixels)
             else
-                Math.max(
-                    metrics.widthPixels, metrics.heightPixels
-                )
+                metrics.widthPixels.coerceAtLeast(metrics.heightPixels)
+
         // photocollage
         mTouchAreaInterval = res.getDimension(R.dimen.touch_area_interval)
 
@@ -153,8 +148,8 @@ import java.util.ArrayList
 
         imageEntities!!.add(entity)
         entity.load(
-            context, ((getWidth() - entity.width) / 2).toFloat(),
-            ((getHeight() - entity.height) / 2).toFloat()
+            context, ((width - entity.width) / 2).toFloat(),
+            ((height - entity.height) / 2).toFloat()
         )
         invalidate()
     }
@@ -267,22 +262,14 @@ import java.util.ArrayList
         destroyBackground()
         // set new background
         this.photoBackgroundUri = photoBackgroundUri
-        if (this.photoBackgroundUri != null) {
+        background = if (this.photoBackgroundUri != null) {
             val d = ImageDecoder.decodeUriToDrawable(
                 context,
                 photoBackgroundUri
             )
-            if (Build.VERSION.SDK_INT >= 16) {
-                background = d
-            } else {
-                setBackgroundDrawable(d)
-            }
+            d
         } else {
-            if (Build.VERSION.SDK_INT >= 16) {
-                background = null
-            } else {
-                setBackgroundDrawable(null)
-            }
+            null
         }
 
     }
@@ -297,11 +284,7 @@ import java.util.ArrayList
             bm = null
         }
 
-        if (Build.VERSION.SDK_INT >= 16) {
-            background = null
-        } else {
-            setBackgroundDrawable(null)
-        }
+        background = null
 
         photoBackgroundUri = null
     }
@@ -338,7 +321,7 @@ import java.util.ArrayList
         }
 
         val result = Bitmap.createBitmap(
-            (getWidth() * outputScale).toInt(), (getHeight() * outputScale).toInt(),
+            (width * outputScale).toInt(), (height * outputScale).toInt(),
             Bitmap.Config.ARGB_8888
         )
         val canvas = Canvas(result)

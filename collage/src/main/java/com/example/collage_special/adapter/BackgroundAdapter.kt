@@ -2,8 +2,8 @@ package com.example.collage_special.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.provider.Settings.Global
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,6 +61,9 @@ class BackgroundAdapter(
             drawable = Drawable.createFromStream(inputStream, null) as Drawable
 
             this.launch(Dispatchers.Main) {
+
+
+
                 Glide.with(mContext).load(drawable).into(holder.img_frame)
             }
         }
@@ -69,7 +72,7 @@ class BackgroundAdapter(
 //        holder.img_frame.setImageDrawable(drawable)
 
         if (selectedindex == position) {
-            holder.ll_itemframe.setBackgroundColor(mContext.resources.getColor(R.color.main2))
+            holder.ll_itemframe.setBackgroundColor(mContext.resources.getColor(R.color.main1))
         } else {
             holder.ll_itemframe.setBackgroundColor(mContext.resources.getColor(R.color.transparent))
         }
@@ -77,7 +80,17 @@ class BackgroundAdapter(
         holder.img_frame.setOnClickListener {
             selectedindex = position
 
-            drawable?.let { bgListener.onBGClick(it) }
+            drawable?.let {
+                bgListener.onBGClick(it)
+
+                val bitmapDrawable = drawable as BitmapDrawable
+                val myBitmap = bitmapDrawable.bitmap
+
+
+                (mContext as CollageActivity).getScaledBitmap(myBitmap)
+            }
+
+
 
             notifyItemChanged(lastSelected)
             notifyItemChanged(position)
