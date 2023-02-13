@@ -18,12 +18,15 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.collage_special.MainActivity.Companion.isFromSaved
+import com.example.collage_special.adapter.FilterNameAdapter
 import com.example.collage_special.model.FilterData
 import com.jaeger.library.StatusBarUtil
 import com.mobi.collage.R
+import kotlinx.android.synthetic.main.activity_collage.*
 import kotlinx.android.synthetic.main.activity_filter_collage.*
 import java.io.File
 import java.io.FileOutputStream
@@ -32,6 +35,7 @@ import java.util.*
 class FilterCollageActivity : AppCompatActivity(), View.OnClickListener {
 
     private var mLastClickTime: Long = 0
+
     fun checkClick() {
         if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
             return
@@ -50,9 +54,13 @@ class FilterCollageActivity : AppCompatActivity(), View.OnClickListener {
                 } catch (th: Throwable) {
                     th.printStackTrace()
                 }
+
+
 //                val intent = Intent(this, MainActivity::class.java)
 //                intent.putExtra("image_uri", savedImageUri!!.toString())
 //                startActivityForResult(intent, 2)
+
+
                 finish()
             }
         }
@@ -114,6 +122,7 @@ class FilterCollageActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     lateinit var bmp: Bitmap
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         StatusBarUtil.setTranslucent(this)
@@ -126,76 +135,76 @@ class FilterCollageActivity : AppCompatActivity(), View.OnClickListener {
 
         img_save.setOnClickListener(this)
 
-//        list_filterstype.layoutManager =
-//            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-//        var filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_clr1)
-//        list_filterstype.adapter = filter_typeAdapter
-//
-//        filter_names.layoutManager =
-//            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-//        var filter_nameAdapter = FilterNameAdapter(this, resources.getStringArray(R.array.filters))
-//
-//        filter_nameAdapter.setOnFilterNameClick(object : FilterNameAdapter.FilterNameClickListener {
-//            override fun onItemClick(view: View, position: Int) {
-//
-//                if (position == 0) {
-//                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_clr1)
-//                    list_filterstype.adapter = filter_typeAdapter
-//                } else if (position == 1) {
-//                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_clr2)
-//                    list_filterstype.adapter = filter_typeAdapter
-//                } else if (position == 2) {
-//                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_duo)
-//                    list_filterstype.adapter = filter_typeAdapter
-//                } else if (position == 3) {
-//                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_pink)
-//                    list_filterstype.adapter = filter_typeAdapter
-//                } else if (position == 4) {
-//                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_fresh)
-//                    list_filterstype.adapter = filter_typeAdapter
-//                } else if (position == 5) {
-//                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_euro)
-//                    list_filterstype.adapter = filter_typeAdapter
-//                } else if (position == 6) {
-//                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_dark)
-//                    list_filterstype.adapter = filter_typeAdapter
-//                } else if (position == 7) {
-//                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_ins)
-//                    list_filterstype.adapter = filter_typeAdapter
-//                } else if (position == 8) {
-//                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_elegant)
-//                    list_filterstype.adapter = filter_typeAdapter
-//                } else if (position == 9) {
-//                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_golden)
-//                    list_filterstype.adapter = filter_typeAdapter
-//                } else if (position == 10) {
-//                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_tint)
-//                    list_filterstype.adapter = filter_typeAdapter
-//                } else if (position == 11) {
-//                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_film)
-//                    list_filterstype.adapter = filter_typeAdapter
-//                } else if (position == 12) {
-//                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_lomo)
-//                    list_filterstype.adapter = filter_typeAdapter
-//                } else if (position == 13) {
-//                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_movie)
-//                    list_filterstype.adapter = filter_typeAdapter
-//                } else if (position == 14) {
-//                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_retro)
-//                    list_filterstype.adapter = filter_typeAdapter
-//                } else if (position == 15) {
-//                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_bw)
-//                    list_filterstype.adapter = filter_typeAdapter
-//                } else {
-//                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_clr1)
-//                    list_filterstype.adapter = filter_typeAdapter
-//                }
-//                filter_nameAdapter.notifyDataSetChanged()
-//                filter_typeAdapter.notifyDataSetChanged()
-//            }
-//        })
-//
-//        filter_names.adapter = filter_nameAdapter
+        list_filterstype.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        var filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_clr1)
+        list_filterstype.adapter = filter_typeAdapter
+
+        filter_names.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        val filter_nameAdapter = FilterNameAdapter(this, resources.getStringArray(R.array.filters))
+
+        filter_nameAdapter.setOnFilterNameClick(object : FilterNameAdapter.FilterNameClickListener {
+            override fun onItemClick(view: View, position: Int) {
+
+                if (position == 0) {
+                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_clr1)
+                    list_filterstype.adapter = filter_typeAdapter
+                } else if (position == 1) {
+                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_clr2)
+                    list_filterstype.adapter = filter_typeAdapter
+                } else if (position == 2) {
+                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_duo)
+                    list_filterstype.adapter = filter_typeAdapter
+                } else if (position == 3) {
+                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_pink)
+                    list_filterstype.adapter = filter_typeAdapter
+                } else if (position == 4) {
+                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_fresh)
+                    list_filterstype.adapter = filter_typeAdapter
+                } else if (position == 5) {
+                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_euro)
+                    list_filterstype.adapter = filter_typeAdapter
+                } else if (position == 6) {
+                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_dark)
+                    list_filterstype.adapter = filter_typeAdapter
+                } else if (position == 7) {
+                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_ins)
+                    list_filterstype.adapter = filter_typeAdapter
+                } else if (position == 8) {
+                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_elegant)
+                    list_filterstype.adapter = filter_typeAdapter
+                } else if (position == 9) {
+                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_golden)
+                    list_filterstype.adapter = filter_typeAdapter
+                } else if (position == 10) {
+                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_tint)
+                    list_filterstype.adapter = filter_typeAdapter
+                } else if (position == 11) {
+                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_film)
+                    list_filterstype.adapter = filter_typeAdapter
+                } else if (position == 12) {
+                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_lomo)
+                    list_filterstype.adapter = filter_typeAdapter
+                } else if (position == 13) {
+                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_movie)
+                    list_filterstype.adapter = filter_typeAdapter
+                } else if (position == 14) {
+                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_retro)
+                    list_filterstype.adapter = filter_typeAdapter
+                } else if (position == 15) {
+                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_bw)
+                    list_filterstype.adapter = filter_typeAdapter
+                } else {
+                    filter_typeAdapter = FilterDetailAdapter(AndroidUtils.filter_clr1)
+                    list_filterstype.adapter = filter_typeAdapter
+                }
+                filter_nameAdapter.notifyDataSetChanged()
+                filter_typeAdapter.notifyDataSetChanged()
+            }
+        })
+
+        filter_names.adapter = filter_nameAdapter
 
     }
 
@@ -205,7 +214,7 @@ class FilterCollageActivity : AppCompatActivity(), View.OnClickListener {
         var selectedindex = 0
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterDetailHolder {
-            var view = LayoutInflater.from(this@FilterCollageActivity)
+            val view = LayoutInflater.from(this@FilterCollageActivity)
                 .inflate(R.layout.item_filter, parent, false)
             return FilterDetailHolder(view)
         }
@@ -217,7 +226,7 @@ class FilterCollageActivity : AppCompatActivity(), View.OnClickListener {
         override fun onBindViewHolder(holder: FilterDetailHolder, @SuppressLint("RecyclerView") position: Int) {
 
             if (selectedindex == position) {
-                holder.rl_filteritem.setBackgroundColor(resources.getColor(R.color.colorAAccent))
+                holder.rl_filteritem.setBackgroundColor(resources.getColor(R.color.main2))
             } else {
                 holder.rl_filteritem.setBackgroundColor(resources.getColor(R.color.transparent))
             }

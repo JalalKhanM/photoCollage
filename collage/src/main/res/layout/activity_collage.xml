@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,6 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@drawable/bg_header2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/header"
         >
 
         <TextView
@@ -25,7 +29,7 @@
             android:textStyle="bold"
             />
 
-        <ImageButton
+       <!-- <ImageButton
             android:id="@+id/btn_next"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -34,8 +38,8 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/save_collage_2"
-
-            />
+            android:visibility="gone"
+            />-->
 
 
     </RelativeLayout>
@@ -63,6 +67,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/header"
+        app:layout_constraintBottom_toTopOf="@+id/content"
        >
 
         <ImageView
@@ -70,7 +76,34 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
+
+
     </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/collagePic"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/header"
+        app:layout_constraintBottom_toTopOf="@+id/content"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_next"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="5dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/white"
+        android:background="@drawable/next"
+        android:gravity="center"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -78,7 +111,11 @@
         android:layout_marginBottom="5dp"
         android:background="@color/reset_bg_normal_color"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/content"
+        app:layout_constraintTop_toBottomOf="@+id/rl_container"
+        app:layout_constraintBottom_toTopOf="@+id/main"
+        >
 
         <LinearLayout
             android:id="@+id/ll_frame"
@@ -88,7 +125,7 @@
             android:visibility="visible">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/list_frames"
+                android:id="@+id/list_framess"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -167,6 +204,35 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:id="@+id/filterContainer"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/filter_namess"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:background="@color/transBackground" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_filterstypes"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/white"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp" />
+
+        </LinearLayout>
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -175,16 +241,20 @@
         android:layout_marginStart="6dp"
         android:layout_marginEnd="3dp"
         android:layout_marginBottom="5dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:id="@+id/main"
+        app:layout_constraintTop_toBottomOf="@+id/content"
+        app:layout_constraintBottom_toTopOf="@+id/bottom"
+        >
 
         <LinearLayout
             android:id="@+id/tab_layout"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_weight="1"
             android:background="@drawable/bg_header"
             android:gravity="center"
-
             >
 
             <TextView
@@ -201,7 +271,7 @@
 
         <LinearLayout
             android:id="@+id/tab_border"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_marginStart="3dp"
             android:layout_marginEnd="3dp"
@@ -223,7 +293,7 @@
 
         <LinearLayout
             android:id="@+id/tab_bg"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_weight="1"
             android:background="@drawable/disable_bg"
@@ -241,11 +311,40 @@
                 />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/filter"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:background="@drawable/disable_bg"
+            android:gravity="center"
+            android:visibility="gone"
+            >
+
+            <TextView
+                android:id="@+id/filterText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Filters"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="16sp"
+                />
+
+        </LinearLayout>
+
+
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/black" />
+        android:background="@color/black"
 
-</LinearLayout>
+        android:id="@+id/bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

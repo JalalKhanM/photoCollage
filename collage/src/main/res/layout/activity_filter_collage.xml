@@ -1,55 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:gravity="center"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
-    <View
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="80dp"
         android:background="@drawable/bg_header2"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/header"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="10dp"
+            android:text="Photo Collage"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/img_save"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/save_collage_2"
+
+            />
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/img_save"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_gravity="end"
-        android:layout_margin="10dp"
-        android:background="@drawable/bg_header"
-        android:text="Save"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:textAllCaps="false"
-        />
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight=".98">
+        app:layout_constraintTop_toBottomOf="@+id/header"
+        app:layout_constraintBottom_toTopOf="@+id/main"
+        android:id="@+id/img"
+       >
 
         <ImageView
             android:id="@+id/img_collage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:adjustViewBounds="true" />
+            android:adjustViewBounds="true"
+
+            />
+
+
 
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="125dp"
         android:orientation="vertical"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
-    
+        android:id="@+id/main"
+        app:layout_constraintTop_toBottomOf="@+id/img"
+        app:layout_constraintBottom_toTopOf="@+id/bottom"
+
         >
 
         <androidx.recyclerview.widget.RecyclerView
@@ -68,10 +96,14 @@
 
     </LinearLayout>
 
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:background="@color/black"
+        android:id="@+id/bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main"
         />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
